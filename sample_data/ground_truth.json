@@ -1,0 +1,113 @@
+[
+  {
+    "document_id": "invoice_01_clean",
+    "vendor_name": "Acme Consulting Partners LLC",
+    "invoice_number": "INV-4521",
+    "invoice_date": "2026-07-15",
+    "due_date": "2026-08-14",
+    "terms": "Net 30",
+    "po_number": "PO-2026-0892",
+    "subtotal": 4200.0,
+    "tax_rate": 0.0,
+    "tax_amount": 0.0,
+    "total": 4200.0,
+    "line_items": [
+      {
+        "description": "Strategic planning services \u2014 July 2026",
+        "quantity": 1,
+        "unit_price": 4200.0,
+        "total": 4200.0
+      }
+    ]
+  },
+  {
+    "document_id": "invoice_02_math_error",
+    "vendor_name": "TechSupplyCo Inc.",
+    "invoice_number": "7783",
+    "invoice_date": "2026-07-28",
+    "due_date": "2026-08-27",
+    "terms": "Net 30",
+    "po_number": "PO-2026-1140",
+    "subtotal": 1000.0,
+    "tax_rate": 0.08,
+    "tax_amount": 80.0,
+    "total": 100000.0,
+    "line_items": [
+      {
+        "description": "Server rack \u2014 42U",
+        "quantity": 2,
+        "unit_price": 500.0,
+        "total": 1000.0
+      }
+    ]
+  },
+  {
+    "document_id": "invoice_03_missing_po",
+    "vendor_name": "Meridian Office Supplies",
+    "invoice_number": "MOS-88213",
+    "invoice_date": "2026-07-20",
+    "due_date": "2026-08-19",
+    "terms": "Net 30",
+    "po_number": null,
+    "subtotal": 4140.0,
+    "tax_rate": 0.0825,
+    "tax_amount": 341.55,
+    "total": 4481.55,
+    "line_items": [
+      {
+        "description": "Standing desks (6 units)",
+        "quantity": 6,
+        "unit_price": 380.0,
+        "total": 2280.0
+      },
+      {
+        "description": "Ergonomic chairs (6 units)",
+        "quantity": 6,
+        "unit_price": 310.0,
+        "total": 1860.0
+      }
+    ]
+  },
+  {
+    "document_id": "invoice_04_high_value",
+    "vendor_name": "Precision Manufacturing Co.",
+    "invoice_number": "PMC-2026-3391",
+    "invoice_date": "2026-07-10",
+    "due_date": "2026-08-09",
+    "terms": "Net 30",
+    "po_number": "PO-2026-0771",
+    "subtotal": 7900.0,
+    "tax_rate": 0.0,
+    "tax_amount": 0.0,
+    "total": 7900.0,
+    "line_items": [
+      {
+        "description": "CNC machining \u2014 batch run 400 units",
+        "quantity": 400,
+        "unit_price": 19.75,
+        "total": 7900.0
+      }
+    ]
+  },
+  {
+    "document_id": "invoice_05_duplicate_of_01",
+    "vendor_name": "Acme Consulting Partners LLC",
+    "invoice_number": "INV-4521",
+    "invoice_date": "2026-07-15",
+    "due_date": "2026-08-14",
+    "terms": "Net 30",
+    "po_number": "PO-2026-0892",
+    "subtotal": 4200.0,
+    "tax_rate": 0.0,
+    "tax_amount": 0.0,
+    "total": 4200.0,
+    "line_items": [
+      {
+        "description": "Strategic planning services \u2014 July 2026",
+        "quantity": 1,
+        "unit_price": 4200.0,
+        "total": 4200.0
+      }
+    ]
+  }
+]
