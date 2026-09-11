@@ -1,0 +1,46 @@
+{
+    "extraction": {
+        "document_id": "INV4521",
+        "vendor": {
+            "name": "Acme Consulting Partners LLC",
+            "address": null,
+            "tax_id": "94-1234567",
+            "confidence": 0.98
+        },
+        "invoice": {
+            "number": "INV-4521",
+            "date": "2026-07-15",
+            "due_date": "2026-08-14",
+            "terms": "Net 30",
+            "po_number": "PO-2026-0892",
+            "confidence": 0.99
+        },
+        "financials": {
+            "currency": "USD",
+            "subtotal": 4200.0,
+            "tax_rate": 0.0,
+            "tax_amount": 0.0,
+            "total": 4200.0,
+            "confidence": 0.99
+        },
+        "line_items": [
+            {
+                "description": "Strategic planning services \u2014 July 2026",
+                "quantity": 1.0,
+                "unit_price": 4200.0,
+                "total": 4200.0
+            }
+        ],
+        "category": "Consulting Services",
+        "overall_confidence": 0.98
+    },
+    "flags": [
+        {
+            "type": "duplicate",
+            "severity": "high",
+            "message": "Invoice INV-4521 from Acme Consulting Partners LLC has already been processed."
+        }
+    ],
+    "status": "flagged",
+    "summary": "Acme Consulting Partners LLC issued invoice INV-4521 for USD 4,200.00, due 2026-08-14. Status: flagged. Invoice INV-4521 from Acme Consulting Partners LLC has already been processed."
+}

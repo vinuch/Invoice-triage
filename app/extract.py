@@ -73,8 +73,8 @@ def _call_gemini(image_b64: str, media_type: str) -> str:
 def extract_invoice(image_path: str, provider: str = "anthropic") -> Extraction:
     """
     Extract structured invoice data from an image file.
-    provider: "anthropic" | "openai" | "gemini"
-    Requires the relevant API key in env (ANTHROPIC_API_KEY / OPENAI_API_KEY / GOOGLE_API_KEY).
+    provider: "anthropic" | "openai" | "gemini" | "openrouter"
+    Requires the relevant API key in env (ANTHROPIC_API_KEY / OPENAI_API_KEY / GOOGLE_API_KEY / OPENROUTER_API_KEY).
     """
     image_b64 = _encode_image(image_path)
     media_type = "image/png" if image_path.lower().endswith("png") else "image/jpeg"
@@ -91,6 +91,8 @@ def extract_invoice(image_path: str, provider: str = "anthropic") -> Extraction:
         raw_json = _call_openai(image_b64, media_type)
     elif provider == "gemini":
         raw_json = _call_gemini(image_b64, media_type)
+    elif provider == "openrouter":
+        raw_json = _call_openrouter(image_b64, media_type)
     else:
         raise ValueError(f"Unsupported provider: {provider}")
 
@@ -135,3 +137,31 @@ def _call_openai(image_b64: str, media_type: str) -> str:
         ],
     )
     return response.choices[0].message.content
+
+def _call_openrouter(image_b64: str, media_type: str) -> str:
+    from openai import OpenAI
+
+    client = OpenAI(
+        api_key=os.environ["OPENROUTER_API_KEY"],
+        base_url="https://openrouter.ai/api/v1",
+    )
+    response = client.chat.completions.create(
+        model="anthropic/claude-sonnet-4.5",
+        response_format={"type": "json_object"},
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": EXTRACTION_PROMPT},
+                    {"type": "image_url", "image_url": {"url": f"data:{media_type};base64,{image_b64}"}},
+                ],
+            }
+        ],
+    )
+    content = response.choices[0].message.content.strip()
+    # Some OpenRouter backends (e.g. Claude via Bedrock) ignore
+    # response_format and wrap output in a markdown code fence.
+    if content.startswith("```"):
+        content = content.split("```")[1]
+        content = content.removeprefix("json").strip()
+    return content

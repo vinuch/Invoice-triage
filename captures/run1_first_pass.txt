@@ -1,0 +1,59 @@
+
+============================================================
+Processing: invoice_01_clean.png
+============================================================
+Vendor:  Acme Consulting Partners LLC
+Invoice: INV-4521
+Total:   USD 4,200.00
+Status:  FLAGGED
+  [HIGH] duplicate: Invoice INV-4521 from Acme Consulting Partners LLC has already been processed.
+
+============================================================
+Processing: invoice_02_math_error.png
+============================================================
+Vendor:  TechSupplyCo Inc.
+Invoice: 7783
+Total:   USD 100,000.00
+Status:  FLAGGED
+  [HIGH] math_mismatch: Subtotal (1000.0) + tax (80.0) = 1080.0, but stated total is 100000.0.
+  [HIGH] duplicate: Invoice 7783 from TechSupplyCo Inc. has already been processed.
+  [MEDIUM] low_confidence: Overall extraction confidence (0.85) is below the 0.9 floor.
+  [MEDIUM] high_value: Invoice total ($100,000.00) exceeds auto-approval threshold of $5,000.00.
+
+============================================================
+Processing: invoice_03_missing_po.png
+============================================================
+Vendor:  Meridian Office Supplies
+Invoice: MOS-88213
+Total:   USD 4,481.55
+Status:  FLAGGED
+  [HIGH] duplicate: Invoice MOS-88213 from Meridian Office Supplies has already been processed.
+  [MEDIUM] missing_po: No PO number found on an invoice over $1,000.
+
+============================================================
+Processing: invoice_04_high_value.png
+============================================================
+Vendor:  Precision Manufacturing Co.
+Invoice: PMC-2026-3391
+Total:   USD 7,900.00
+Status:  FLAGGED
+  [HIGH] duplicate: Invoice PMC-2026-3391 from Precision Manufacturing Co. has already been processed.
+  [MEDIUM] high_value: Invoice total ($7,900.00) exceeds auto-approval threshold of $5,000.00.
+
+============================================================
+Processing: invoice_05_duplicate_of_01.png
+============================================================
+Vendor:  Acme Consulting Partners LLC
+Invoice: INV-4521
+Total:   USD 4,200.00
+Status:  FLAGGED
+  [HIGH] duplicate: Invoice INV-4521 from Acme Consulting Partners LLC has already been processed.
+
+============================================================
+BATCH SUMMARY
+============================================================
+invoice_01_clean.png                     -> FLAGGED
+invoice_02_math_error.png                -> FLAGGED
+invoice_03_missing_po.png                -> FLAGGED
+invoice_04_high_value.png                -> FLAGGED
+invoice_05_duplicate_of_01.png           -> FLAGGED

@@ -5,15 +5,11 @@ Core principle: AI extracts, code decides. Never let the model's confidence
 score alone gate a financial decision — verify what can be verified.
 """
 from app.models import Extraction, Flag, TriageResult
+from app import db
 
 AUTO_APPROVE_THRESHOLD = 5000.00
 CONFIDENCE_FLOOR = 0.90
 MATH_TOLERANCE = 0.01  # cents-level rounding slack
-
-# In-memory store for demo purposes. Swap for a real DB table keyed on
-# (vendor_name, invoice_number) in production.
-_SEEN_INVOICES: set[tuple[str, str]] = set()
-
 
 def verify_math(extraction: Extraction) -> Flag | None:
     f = extraction.financials
@@ -29,15 +25,16 @@ def verify_math(extraction: Extraction) -> Flag | None:
 
 
 def check_duplicate(extraction: Extraction) -> Flag | None:
-    key = (extraction.vendor.name.strip().lower(), extraction.invoice.number.strip())
-    if key in _SEEN_INVOICES:
+    vendor = extraction.vendor.name.strip().lower()
+    number = extraction.invoice.number.strip()
+    if db.is_duplicate(vendor, number):
         return Flag(
             type="duplicate",
             severity="high",
             message=f"Invoice {extraction.invoice.number} from {extraction.vendor.name} "
                     f"has already been processed.",
         )
-    _SEEN_INVOICES.add(key)
+    db.record_invoice(vendor, number, extraction.financials.total, "seen")
     return None
 
 
